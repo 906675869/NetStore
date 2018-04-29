@@ -1,7 +1,7 @@
-package com.example.demo.util;
+package com.bdsoft.xtgl.util;
 
-import com.example.demo.entity.Function;
-import com.example.demo.entity.Role;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Role;
 
 import java.util.List;
 

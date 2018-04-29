@@ -1,9 +1,15 @@
-package com.example.demo.aop;
+package com.bdsoft.xtgl.aop;
 
-import com.example.demo.util.utilimpl.CommonUtils;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.User;
+import com.bdsoft.xtgl.service.UserServiceI;
+import com.bdsoft.xtgl.util.UserUtilsI;
+import com.bdsoft.xtgl.util.utilimpl.CommonUtils;
+import com.bdsoft.xtgl.util.utilimpl.UserUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -11,6 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by qianxp on 17/4/27.
@@ -19,6 +26,17 @@ import javax.servlet.http.HttpServletResponse;
 @Aspect
 @Component
 public class LoginAspect {
+    @Autowired
+    private UserServiceI userServiceI;
+
+    public UserServiceI getUserServiceI() {
+        return userServiceI;
+    }
+
+    public void setUserServiceI(UserServiceI userServiceI) {
+        this.userServiceI = userServiceI;
+    }
+
     @Pointcut("execution(public * com.example.demo.controller.afterlogin.*.*(..))")
     public void webLog(){}
 
@@ -36,24 +54,18 @@ public class LoginAspect {
         //获取响应
         HttpServletResponse response = attributes.getResponse();
         //usersession的判断
-        String userSession = CommonUtils.convertNullToString( request.getSession().getAttribute("usersession") );
+        User userSession  = userServiceI.getCurrentUser();
         if(StringUtils.isEmpty(userSession)){
             response.sendRedirect("/index");
         }
         //权限的判断
         String url = request.getRequestURL().toString();
-
-        //获取用户的usersession
-
-        // 记录下请求内容
-//        System.out.println("URL : " + request.getRequestURL().toString());
-//        System.out.println("HTTP_METHOD : " + request.getMethod());
-//        System.out.println("IP : " + request.getRemoteAddr());
-//        System.out.println("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-//        System.out.println("ARGS : " + Arrays.toString(joinPoint.getArgs()));
-
+        List<Function> functionList = userServiceI.getCurrentUserFunctions();
+        if(! CommonUtils.toMatchList(url,functionList,"url")){
+            response.sendRedirect("/no_function");
+        }
     }
-
+/*
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
@@ -72,7 +84,7 @@ public class LoginAspect {
         System.out.println("方法最后执行.....");
     }
 
-    //环绕通知,环绕增强，相当于MethodInterceptor
+  //环绕通知,环绕增强，相当于MethodInterceptor
     @Around("webLog()")
     public Object arround(ProceedingJoinPoint pjp) {
         System.out.println("方法环绕start.....");
@@ -84,5 +96,5 @@ public class LoginAspect {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }

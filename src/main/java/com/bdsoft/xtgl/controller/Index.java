@@ -1,13 +1,9 @@
-package com.example.demo.controller;
+package com.bdsoft.xtgl.controller;
 
-import com.example.demo.entity.User;
-import com.example.demo.service.UserServiceI;
+import com.bdsoft.xtgl.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 public class Index {
@@ -29,4 +25,9 @@ public class Index {
 //        return list.toString();
 //        return "hello";
     }
+    @RequestMapping("/login")
+    public String login(){
+        return null;
+    }
+
 }

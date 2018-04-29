@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.bdsoft.xtgl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

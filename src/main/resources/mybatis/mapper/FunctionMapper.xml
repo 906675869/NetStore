@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.UserMapper" >
+<mapper namespace="com.bdsoft.xtgl.mapper.FunctionMapper" >
 
-    <resultMap id="BaseResultMap" type="com.example.demo.entity.Function" >
+    <resultMap id="BaseResultMap" type="com.bdsoft.xtgl.entity.Function" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="roleId" property="roleId" jdbcType="INTEGER" />
         <result column="url" property="url" jdbcType="VARCHAR" />
@@ -27,7 +27,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getFunctionsByRole" parameterType="com.example.demo.entity.Role" resultMap="BaseResultMap">
+    <select id="getFunctionsByRole" parameterType="com.bdsoft.xtgl.entity.Role" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM function
@@ -35,7 +35,7 @@
         where role.id = #{id}
     </select>
 
-    <select id="getFunctionsByUser" parameterType="com.example.demo.entity.User" resultMap="BaseResultMap">
+    <select id="getFunctionsByUser" parameterType="com.bdsoft.xtgl.entity.User" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM function
@@ -44,7 +44,7 @@
         where user.id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.example.demo.entity.Function" >
+    <insert id="insert" parameterType="com.bdsoft.xtgl.entity.Function" >
         INSERT INTO
         function
         (<include refid="Base_Column_List" />)
@@ -52,7 +52,7 @@
         (#{id},#{roleId}, #{url},#{des})
     </insert>
 
-    <update id="update" parameterType="com.example.demo.entity.Function" >
+    <update id="update" parameterType="com.bdsoft.xtgl.entity.Function" >
         UPDATE
         function
         SET

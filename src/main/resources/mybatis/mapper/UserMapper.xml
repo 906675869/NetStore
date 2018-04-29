@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.UserMapper" >
+<mapper namespace="com.bdsoft.xtgl.mapper.UserMapper" >
 
-    <resultMap id="BaseResultMap" type="com.example.demo.entity.User" >
+    <resultMap id="BaseResultMap" type="com.bdsoft.xtgl.entity.User" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="age" property="age" jdbcType="INTEGER" />
@@ -26,7 +26,7 @@
         WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.example.demo.entity.User" >
+    <insert id="insert" parameterType="com.bdsoft.xtgl.entity.User" >
         INSERT INTO
         user
         (id,name,age,address)
@@ -34,7 +34,7 @@
         (#{id},#{name}, #{age}, #{address})
     </insert>
 
-    <update id="update" parameterType="com.example.demo.entity.User" >
+    <update id="update" parameterType="com.bdsoft.xtgl.entity.User" >
         UPDATE
         user
         SET

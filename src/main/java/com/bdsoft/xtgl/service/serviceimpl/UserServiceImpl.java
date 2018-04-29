@@ -1,13 +1,13 @@
-package com.example.demo.service.serviceimpl;
+package com.bdsoft.xtgl.service.serviceimpl;
 
-import com.example.demo.entity.Function;
-import com.example.demo.entity.Role;
-import com.example.demo.entity.User;
-import com.example.demo.mapper.FunctionMapper;
-import com.example.demo.mapper.RoleMapper;
-import com.example.demo.mapper.UserMapper;
-import com.example.demo.service.UserServiceI;
-import com.example.demo.util.utilimpl.RedisUtils;
+import com.bdsoft.xtgl.mapper.FunctionMapper;
+import com.bdsoft.xtgl.mapper.RoleMapper;
+import com.bdsoft.xtgl.util.utilimpl.RedisUtils;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Role;
+import com.bdsoft.xtgl.entity.User;
+import com.bdsoft.xtgl.mapper.UserMapper;
+import com.bdsoft.xtgl.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -126,5 +126,10 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public List<Function> getUserFunctions(User user) {
         return functionMapper.getFunctionsByUser(user);
+    }
+
+    @Override
+    public List<Function> getCurrentUserFunctions() {
+        return getUserFunctions(getCurrentUser());
     }
 }

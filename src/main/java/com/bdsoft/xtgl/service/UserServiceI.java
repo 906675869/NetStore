@@ -1,9 +1,8 @@
-package com.example.demo.service;
+package com.bdsoft.xtgl.service;
 
-import com.example.demo.entity.Function;
-import com.example.demo.entity.Role;
-import com.example.demo.entity.User;
-import org.springframework.stereotype.Controller;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Role;
+import com.bdsoft.xtgl.entity.User;
 
 import java.util.List;
 
@@ -52,4 +51,8 @@ public interface UserServiceI {
      */
     List<Function> getUserFunctions(User user);
 
+    /**
+     * 获取当前用户权限
+     */
+    List<Function> getCurrentUserFunctions();
 }

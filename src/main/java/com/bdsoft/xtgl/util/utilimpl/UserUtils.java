@@ -1,9 +1,9 @@
-package com.example.demo.util.utilimpl;
+package com.bdsoft.xtgl.util.utilimpl;
 
-import com.example.demo.entity.Function;
-import com.example.demo.entity.Role;
-import com.example.demo.service.UserServiceI;
-import com.example.demo.util.UserUtilsI;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Role;
+import com.bdsoft.xtgl.service.UserServiceI;
+import com.bdsoft.xtgl.util.UserUtilsI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

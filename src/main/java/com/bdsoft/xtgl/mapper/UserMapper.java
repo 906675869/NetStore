@@ -1,6 +1,6 @@
-package com.example.demo.mapper;
+package com.bdsoft.xtgl.mapper;
 
-import com.example.demo.entity.User;
+import com.bdsoft.xtgl.entity.User;
 
 import java.util.List;
 public interface UserMapper {

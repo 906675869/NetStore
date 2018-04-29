@@ -1,8 +1,8 @@
-package com.example.demo.mapper;
+package com.bdsoft.xtgl.mapper;
 
-import com.example.demo.entity.Function;
-import com.example.demo.entity.Role;
-import com.example.demo.entity.User;
+import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Role;
+import com.bdsoft.xtgl.entity.User;
 
 import java.util.List;
 

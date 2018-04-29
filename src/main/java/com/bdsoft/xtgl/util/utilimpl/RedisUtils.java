@@ -1,4 +1,4 @@
-package com.example.demo.util.utilimpl;
+package com.bdsoft.xtgl.util.utilimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;

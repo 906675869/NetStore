@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.demo.mapper.UserMapper" >
+<mapper namespace="com.bdsoft.xtgl.mapper.RoleMapper" >
 
-    <resultMap id="BaseResultMap" type="com.example.demo.entity.Role" >
+    <resultMap id="BaseResultMap" type="com.bdsoft.xtgl.entity.Role" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="usrId" property="usrId" jdbcType="INTEGER" />
         <result column="des" property="desc" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="getRolesByUser" parameterMap="com.example.demo.entity.User" resultMap="BaseResultMap">
+    <select id="getRolesByUser" parameterMap="com.bdsoft.xtgl.entity.User" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM role
@@ -33,7 +33,7 @@
         WHERE user.id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.example.demo.entity.Role" >
+    <insert id="insert" parameterType="com.bdsoft.xtgl.entity.Role" >
         INSERT INTO
         role
         (
@@ -43,7 +43,7 @@
         (#{id},#{usrid}, #{des})
     </insert>
 
-    <update id="update" parameterType="com.example.demo.entity.Role" >
+    <update id="update" parameterType="com.bdsoft.xtgl.entity.Role" >
         UPDATE
         role
         SET

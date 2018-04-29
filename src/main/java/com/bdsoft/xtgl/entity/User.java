@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package com.bdsoft.xtgl.entity;
 
 import java.io.Serializable;
 
