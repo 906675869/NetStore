@@ -13,11 +13,20 @@ import java.util.List;
 public class Index {
     @Autowired
     private UserServiceI userServiceI;
-    @ResponseBody
+
+    public UserServiceI getUserServiceI() {
+        return userServiceI;
+    }
+
+    public void setUserServiceI(UserServiceI userServiceI) {
+        this.userServiceI = userServiceI;
+    }
+
     @RequestMapping("/index")
     public String index(){
-        List<User> list =  userServiceI.getAll();
-        return list.toString();
+        return "index";
+//        List<User> list =  userServiceI.getAll();
+//        return list.toString();
 //        return "hello";
     }
 }

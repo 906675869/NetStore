@@ -1,23 +1,32 @@
 package com.example.demo.service.serviceimpl;
 
+import com.example.demo.entity.Function;
+import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
+import com.example.demo.mapper.FunctionMapper;
+import com.example.demo.mapper.RoleMapper;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserServiceI;
-import com.example.demo.util.RedisUtils;
+import com.example.demo.util.utilimpl.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class UserServiceImpl implements UserServiceI {
-
     @Autowired
     private RedisUtils redisUtils;
-
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private FunctionMapper functionMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     public RedisUtils getRedisUtils() {
         return redisUtils;
@@ -33,6 +42,22 @@ public class UserServiceImpl implements UserServiceI {
 
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    public FunctionMapper getFunctionMapper() {
+        return functionMapper;
+    }
+
+    public void setFunctionMapper(FunctionMapper functionMapper) {
+        this.functionMapper = functionMapper;
+    }
+
+    public RoleMapper getRoleMapper() {
+        return roleMapper;
+    }
+
+    public void setRoleMapper(RoleMapper roleMapper) {
+        this.roleMapper = roleMapper;
     }
 
     @Override
@@ -77,5 +102,29 @@ public class UserServiceImpl implements UserServiceI {
         String key = "User:"+id;
         redisUtils.remove(key);
         userMapper.delete(id);
+    }
+
+    @Override
+    public User getCurrentUser() {
+        // 接收到请求，记录请求内容
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        //获取请求
+        HttpServletRequest request = attributes.getRequest();
+        Object object  = request.getSession().getAttribute(USERSESSION);
+        if(!StringUtils.isEmpty(object)){
+            User user = (User)object;
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Role> getUserRoles(User user) {
+        return roleMapper.getRolesByUser(user);
+    }
+
+    @Override
+    public List<Function> getUserFunctions(User user) {
+        return functionMapper.getFunctionsByUser(user);
     }
 }
