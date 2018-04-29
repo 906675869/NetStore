@@ -52,4 +52,13 @@
         id =#{id}
     </delete>
 
+    <select id="selectUserByLoginName" parameterMap="com.bdsoft.xtgl.entity.Login" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        user
+        LEFT JOIN login on login.usrid = user.id
+        WHERE
+        login.loginName = #{loginName}
+    </select>
 </mapper>

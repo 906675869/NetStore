@@ -1,5 +1,6 @@
 package com.bdsoft.xtgl.service.serviceimpl;
 
+import com.bdsoft.xtgl.entity.Login;
 import com.bdsoft.xtgl.mapper.FunctionMapper;
 import com.bdsoft.xtgl.mapper.RoleMapper;
 import com.bdsoft.xtgl.util.utilimpl.RedisUtils;
@@ -131,5 +132,10 @@ public class UserServiceImpl implements UserServiceI {
     @Override
     public List<Function> getCurrentUserFunctions() {
         return getUserFunctions(getCurrentUser());
+    }
+
+    @Override
+    public User getUserByLoginName(Login login) {
+        return userMapper.selectUserByLoginName(login);
     }
 }

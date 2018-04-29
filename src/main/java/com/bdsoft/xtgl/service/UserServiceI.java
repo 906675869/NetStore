@@ -1,6 +1,7 @@
 package com.bdsoft.xtgl.service;
 
 import com.bdsoft.xtgl.entity.Function;
+import com.bdsoft.xtgl.entity.Login;
 import com.bdsoft.xtgl.entity.Role;
 import com.bdsoft.xtgl.entity.User;
 
@@ -55,4 +56,11 @@ public interface UserServiceI {
      * 获取当前用户权限
      */
     List<Function> getCurrentUserFunctions();
+
+    /**
+     * 通过登录名获取当前用户
+     * @param login 登录信息
+     * @return 用户信息
+     */
+    User getUserByLoginName(Login login);
 }

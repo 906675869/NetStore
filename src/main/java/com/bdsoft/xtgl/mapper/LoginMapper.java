@@ -14,4 +14,6 @@ public interface LoginMapper {
     int updateByPrimaryKeySelective(Login record);
 
     int updateByPrimaryKey(Login record);
+
+    Login selectByLoginName(String loginName);
 }
