@@ -13,6 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.jboss.logging.Logger;
 
 /**
  * 编码加密工具类
@@ -22,7 +23,7 @@ public class CodeUtils {
 
     private CodeUtils() {
     }
-
+    private static Logger logger = Logger.getLogger(CodeUtils.class);
     /** Base64 编码 */
     private static final Base64 B64 = new Base64();
     /** 安全的随机数源 */
@@ -217,8 +218,7 @@ public class CodeUtils {
                     return new String(B64.encode(bytes));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("DES加密失败, 密文：" + str + ", 错误：" + e.getMessage());
+                logger.error("DES加密失败, 密文：" + str + ", 错误：" + e.getMessage());
             }
         }
         return null;
@@ -237,8 +237,7 @@ public class CodeUtils {
                 byte[] bytes = DES_CIPHER_DEC.doFinal(B64.decode(str));// 解密
                 return new String(bytes, "UTF-8");
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("DES解密失败, 密文：" + str + ", 错误：" + e.getMessage());
+                logger.error("DES解密失败, 密文：" + str + ", 错误：" + e.getMessage());
             }
         }
         return null;
@@ -295,8 +294,7 @@ public class CodeUtils {
                     return new String(B64.encode(bytes));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("DES加密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+                logger.error("DES加密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             }
         }
         return null;
@@ -319,11 +317,9 @@ public class CodeUtils {
                 byte[] bytes = c.doFinal(B64.decode(str));
                 return new String(bytes, "UTF-8");
             } catch (BadPaddingException e) {
-                e.printStackTrace();
-//                Log.error("DES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+                logger.error("DES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("DES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+               logger.error("DES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             }
         }
         return null;
@@ -377,8 +373,7 @@ public class CodeUtils {
                     return new String(B64.encode(bytes));
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("AES加密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+                logger.error("AES加密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             }
         }
         return null;
@@ -400,11 +395,9 @@ public class CodeUtils {
                 c.init(Cipher.DECRYPT_MODE, aesKey(key), RANDOM);
                 return new String(c.doFinal(B64.decode(str)), "UTF-8");// 解密
             } catch (BadPaddingException e) {
-                e.printStackTrace();
-//                Log.error("AES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+               logger.error("AES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             } catch (Exception e) {
-                e.printStackTrace();
-//                Log.error("AES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
+               logger.error("AES解密失败, 密文：" + str + ", key：" + key + ", 错误：" + e.getMessage());
             }
         }
         return null;
