@@ -63,4 +63,7 @@ public interface UserServiceI {
      * @return 用户信息
      */
     User getUserByLoginName(Login login);
+
+    /*清除登录用户的session 登出操作*/
+    boolean clearUserSession();
 }

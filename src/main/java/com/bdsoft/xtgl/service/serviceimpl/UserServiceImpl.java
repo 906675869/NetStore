@@ -138,4 +138,16 @@ public class UserServiceImpl implements UserServiceI {
     public User getUserByLoginName(Login login) {
         return userMapper.selectUserByLoginName(login);
     }
+
+    @Override
+    public boolean clearUserSession() {
+        // 接收到请求，记录请求内容
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        //获取请求
+        HttpServletRequest request = attributes.getRequest();
+        //移除用户信息
+        request.getSession().removeAttribute(USERSESSION);
+        return true;
+    }
+
 }

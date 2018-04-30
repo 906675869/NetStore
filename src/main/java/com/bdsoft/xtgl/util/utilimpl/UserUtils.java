@@ -6,6 +6,7 @@ import com.bdsoft.xtgl.service.UserServiceI;
 import com.bdsoft.xtgl.util.UserUtilsI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class UserUtils implements UserUtilsI {
 
     @Override
     public String getCurrentUserName() {
+        if( StringUtils.isEmpty(userServiceI.getCurrentUser())){ return ""; }
         return userServiceI.getCurrentUser().getName();
     }
 

@@ -26,9 +26,10 @@ public class WebTimeFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
         chain.doFilter(request, response);
-        logger.error("filter 耗时：" + (System.currentTimeMillis() - start));
+//        String url = request.getRemoteAddr();
+//        logger.error(url+" 耗时：" + (System.currentTimeMillis() - start));
 //        log.warn("filter 耗时：" + (System.currentTimeMillis() - start));
 //        System.out.println("filter 耗时：" + (System.currentTimeMillis() - start));
     }

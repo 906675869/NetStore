@@ -217,3 +217,16 @@ h1 { font-size: 24px; }
         padding-right: 0;
     }
 }
+
+.align-right{
+    text-align : right;
+    font-size :16px;
+    font-family : "宋体";
+    float : right;
+    margin:15px 15px 0 0;
+
+}
+
+.error{
+	color:red;
+}
