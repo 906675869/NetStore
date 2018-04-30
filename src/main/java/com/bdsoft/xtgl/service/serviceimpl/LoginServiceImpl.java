@@ -5,6 +5,7 @@ import com.bdsoft.xtgl.entity.User;
 import com.bdsoft.xtgl.mapper.LoginMapper;
 import com.bdsoft.xtgl.service.LoginServiceI;
 import com.bdsoft.xtgl.service.UserServiceI;
+import com.bdsoft.xtgl.util.utilimpl.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,16 @@ public class LoginServiceImpl implements LoginServiceI {
     private LoginMapper loginMapper;
     @Autowired
     private UserServiceI userServiceI;
+    @Autowired
+    private RedisUtils redisUtils;
+
+    public RedisUtils getRedisUtils() {
+        return redisUtils;
+    }
+
+    public void setRedisUtils(RedisUtils redisUtils) {
+        this.redisUtils = redisUtils;
+    }
 
     public UserServiceI getUserServiceI() {
         return userServiceI;
@@ -42,7 +53,17 @@ public class LoginServiceImpl implements LoginServiceI {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         //获取请求
         HttpServletRequest request = attributes.getRequest();
-        Login login = loginMapper.selectByLoginName(loginName);
+        Login login = new Login();
+        login.setLoginname(loginName);
+        login.setPassword(password);
+        //在redis中根据登录名获取login对象
+        String redisKey = "Login:"+loginName;
+        if( !redisUtils.exists(redisKey) ){
+            login = loginMapper.selectByLoginName(login);
+            redisUtils.set(redisKey,login);
+        }else {
+            login = (Login) redisUtils.get(redisKey);
+        }
         if(StringUtils.isEmpty(login)){
             return "用户不存在";
         }
@@ -53,5 +74,16 @@ public class LoginServiceImpl implements LoginServiceI {
         request.getSession().setAttribute(UserServiceI.USERSESSION,user);
 
         return "登录成功";
+    }
+
+    @Override
+    public boolean updateLogin(Login login) {
+        String key = "Login:"+login.getLoginname();
+        boolean redisResult = redisUtils.set(key,login);
+        Integer mybatisResult = loginMapper.updateByPrimaryKey(login);
+        if(!redisResult || mybatisResult == 0){
+            return  false;
+        }
+        return true;
     }
 }

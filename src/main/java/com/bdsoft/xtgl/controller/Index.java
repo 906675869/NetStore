@@ -1,15 +1,19 @@
 package com.bdsoft.xtgl.controller;
 
+import com.bdsoft.xtgl.service.LoginServiceI;
 import com.bdsoft.xtgl.service.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class Index {
     @Autowired
     private UserServiceI userServiceI;
-
+    @Autowired
+    private LoginServiceI loginServiceI;
 
 
     public UserServiceI getUserServiceI() {
@@ -20,6 +24,14 @@ public class Index {
         this.userServiceI = userServiceI;
     }
 
+    public LoginServiceI getLoginServiceI() {
+        return loginServiceI;
+    }
+
+    public void setLoginServiceI(LoginServiceI loginServiceI) {
+        this.loginServiceI = loginServiceI;
+    }
+
     @RequestMapping("/index")
     public String index(){
         return "index";
@@ -28,8 +40,9 @@ public class Index {
 //        return "hello";
     }
     @RequestMapping("/login")
-    public String login(){
-        return null;
+    @ResponseBody
+    public String login(@RequestParam("userName")String userName,@RequestParam("password")String password){
+        return loginServiceI.doLogin(userName,password);
     }
 
 }

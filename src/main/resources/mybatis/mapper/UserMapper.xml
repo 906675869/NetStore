@@ -10,7 +10,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, name, age, address
+        user.id, user.name, user.age, user.address
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap"  >
@@ -52,13 +52,13 @@
         id =#{id}
     </delete>
 
-    <select id="selectUserByLoginName" parameterMap="com.bdsoft.xtgl.entity.Login" resultMap="BaseResultMap">
+    <select id="selectUserByLoginName" parameterType="com.bdsoft.xtgl.entity.Login" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM
         user
         LEFT JOIN login on login.usrid = user.id
         WHERE
-        login.loginName = #{loginName}
+        login.loginName = #{loginname} and login.password = #{password}
     </select>
 </mapper>

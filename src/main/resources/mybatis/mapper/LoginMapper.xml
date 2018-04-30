@@ -16,11 +16,11 @@
     from login
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectByLoginName" resultMap="BaseResultMap" parameterMap="com.bdsoft.xtgl.entity.Login">
+    <select id="selectByLoginName" resultMap="BaseResultMap" parameterType="com.bdsoft.xtgl.entity.Login">
         select
         <include refid="Base_Column_List" />
         from login
-        where loginName=#{loginName}
+        where loginName=#{loginname,jdbcType=VARCHAR} and  password =  #{password,jdbcType=VARCHAR}
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from login
