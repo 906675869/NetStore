@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.aop;
+package com.bdsoft.xtgl.config.aop;
 
 import com.bdsoft.xtgl.entity.Function;
 import com.bdsoft.xtgl.entity.User;

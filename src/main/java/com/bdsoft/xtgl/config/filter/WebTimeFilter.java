@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.filter;
+package com.bdsoft.xtgl.config.filter;
 
 
 import org.jboss.logging.Logger;
