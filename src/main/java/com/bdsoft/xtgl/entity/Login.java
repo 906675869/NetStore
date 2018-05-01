@@ -13,6 +13,15 @@ public class Login implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Login() {
+    }
+
+    public Login(Integer usrid, String loginname, String password) {
+        this.usrid = usrid;
+        this.loginname = loginname;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }

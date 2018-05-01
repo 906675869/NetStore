@@ -8,14 +8,22 @@ public class User implements Serializable {
     private Integer age;
     private String address;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                '}';
+    public User() {
+    }
+
+    public User(String name) {
+        this.name = name;
+    }
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public User(String name, Integer age, String address) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
     }
 
     public Integer getId() {
@@ -48,5 +56,15 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

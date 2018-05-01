@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.jms.Queue;
 
@@ -15,9 +16,12 @@ import javax.jms.Queue;
 @EnableAutoConfiguration
 @ComponentScan
 @MapperScan("com.bdsoft.xtgl.mapper")
+/*开启JMS*/
 @EnableJms
+/*事务开启*/
+@EnableTransactionManagement
 public class DemoApplication {
-	/*注入消息队列 名字为sample.queue*/
+	/*注入消息队列 默认名字为sample.queue*/
 	@Bean
 	public Queue queue() {
 		return new ActiveMQQueue("sample.queue");

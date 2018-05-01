@@ -9,7 +9,7 @@ public interface UserMapper {
 
     User getOne(Integer id);
 
-    void insert(User user);
+    int insert(User user);
 
     void update(User user);
 

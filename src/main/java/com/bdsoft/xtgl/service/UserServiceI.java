@@ -1,9 +1,6 @@
 package com.bdsoft.xtgl.service;
 
-import com.bdsoft.xtgl.entity.Function;
-import com.bdsoft.xtgl.entity.Login;
-import com.bdsoft.xtgl.entity.Role;
-import com.bdsoft.xtgl.entity.User;
+import com.bdsoft.xtgl.entity.*;
 
 import java.util.List;
 
@@ -66,4 +63,6 @@ public interface UserServiceI {
 
     /*清除登录用户的session 登出操作*/
     boolean clearUserSession();
+
+    String register(Register register);
 }

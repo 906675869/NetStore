@@ -10,7 +10,7 @@ public interface RoleMapper {
 
     Role getOne(Integer id);
 
-    void insert(Role role);
+    int insert(Role role);
 
     void update(Role role);
 

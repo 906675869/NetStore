@@ -1,16 +1,20 @@
 package com.bdsoft.xtgl.service.serviceimpl;
 
-import com.bdsoft.xtgl.entity.Login;
+import com.bdsoft.xtgl.entity.*;
 import com.bdsoft.xtgl.mapper.FunctionMapper;
+import com.bdsoft.xtgl.mapper.LoginMapper;
 import com.bdsoft.xtgl.mapper.RoleMapper;
+import com.bdsoft.xtgl.util.activemq.Producer;
+import com.bdsoft.xtgl.util.activemq.QueueName;
 import com.bdsoft.xtgl.util.utilimpl.RedisUtils;
-import com.bdsoft.xtgl.entity.Function;
-import com.bdsoft.xtgl.entity.Role;
-import com.bdsoft.xtgl.entity.User;
 import com.bdsoft.xtgl.mapper.UserMapper;
 import com.bdsoft.xtgl.service.UserServiceI;
+import io.netty.handler.codec.json.JsonObjectDecoder;
+import net.sf.json.JSONObject;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -18,16 +22,24 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@Controller
+@Service
 public class UserServiceImpl implements UserServiceI {
     @Autowired
     private RedisUtils redisUtils;
     @Autowired
     private UserMapper userMapper;
     @Autowired
+    private LoginMapper loginMapper;
+
+    @Autowired
     private FunctionMapper functionMapper;
     @Autowired
     private RoleMapper roleMapper;
+
+    @Autowired
+    private Producer producer;
+
+    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
 
     public RedisUtils getRedisUtils() {
         return redisUtils;
@@ -59,6 +71,22 @@ public class UserServiceImpl implements UserServiceI {
 
     public void setRoleMapper(RoleMapper roleMapper) {
         this.roleMapper = roleMapper;
+    }
+
+    public LoginMapper getLoginMapper() {
+        return loginMapper;
+    }
+
+    public void setLoginMapper(LoginMapper loginMapper) {
+        this.loginMapper = loginMapper;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
     }
 
     @Override
@@ -148,6 +176,27 @@ public class UserServiceImpl implements UserServiceI {
         //移除用户信息
         request.getSession().removeAttribute(USERSESSION);
         return true;
+    }
+
+    @Transactional
+    @Override
+    public String register(Register register) {
+        // 【1】生成对应用户【2】生成对应登录用户（逻辑相关）
+        // 【3】生成邮件系统消息【4】生成电话系统消息 【5】生成通知系统消息（逻辑无关调用消息队列）
+        //【1】生成对应用户
+            User user = new User(register.getUserName(), register.getAge());
+            userMapper.insert(user);
+            //【2】生成对应登录用户
+            Login login = new Login(user.getId(), register.getUserName(), register.getPassword());
+            loginMapper.insert(login);
+            //【3】生成邮件系统消息
+            String registerMsg = JSONObject.fromObject(register).toString();
+            producer.send(registerMsg, QueueName.Mail);
+            //【4】生成电话系统消息
+            producer.send(registerMsg, QueueName.Phone);
+            //【5】生成通知系统消息
+            producer.send(registerMsg, QueueName.Notice);
+            return "success";
     }
 
 }

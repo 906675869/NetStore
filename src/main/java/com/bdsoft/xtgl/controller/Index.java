@@ -1,5 +1,6 @@
 package com.bdsoft.xtgl.controller;
 
+import com.bdsoft.xtgl.entity.Register;
 import com.bdsoft.xtgl.service.LoginServiceI;
 import com.bdsoft.xtgl.service.UserServiceI;
 import com.bdsoft.xtgl.util.utilimpl.UserUtils;
@@ -41,15 +42,12 @@ public class Index {
     public void setLoginServiceI(LoginServiceI loginServiceI) {
         this.loginServiceI = loginServiceI;
     }
-
+    //系统首页
     @RequestMapping("/index")
     public String index(){
         return "index";
-//        List<User> list =  userServiceI.getAll();
-//        return list.toString();
-//        return "hello";
     }
-//   用户登录
+   //用户登录
     @RequestMapping("/login")
     @ResponseBody
     public String login(@RequestParam("userName")String userName,@RequestParam("password")String password){
@@ -66,6 +64,12 @@ public class Index {
     @ResponseBody
     public String logout(){
         return String.valueOf(userServiceI.clearUserSession());
+    }
+    //注册用户
+    @ResponseBody
+    @RequestMapping("/register")
+    public String register(Register register){
+        return userServiceI.register(register);
     }
 
 
