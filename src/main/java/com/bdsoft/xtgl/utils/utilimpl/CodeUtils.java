@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util.utilimpl;
+package com.bdsoft.xtgl.utils.utilimpl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

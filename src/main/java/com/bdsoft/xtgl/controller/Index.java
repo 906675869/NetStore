@@ -3,7 +3,7 @@ package com.bdsoft.xtgl.controller;
 import com.bdsoft.xtgl.entity.Register;
 import com.bdsoft.xtgl.service.LoginServiceI;
 import com.bdsoft.xtgl.service.UserServiceI;
-import com.bdsoft.xtgl.util.utilimpl.UserUtils;
+import com.bdsoft.xtgl.utils.utilimpl.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

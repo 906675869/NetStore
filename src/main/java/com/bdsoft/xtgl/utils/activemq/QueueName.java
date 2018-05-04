@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util.activemq;
+package com.bdsoft.xtgl.utils.activemq;
 
 /**
  *用于存放消息队列的名字

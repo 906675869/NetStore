@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util.activemq;
+package com.bdsoft.xtgl.utils.activemq;
 import javax.jms.Destination;
 import javax.jms.Queue;
 

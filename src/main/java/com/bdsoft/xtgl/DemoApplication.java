@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.jms.Queue;
@@ -20,6 +21,8 @@ import javax.jms.Queue;
 @EnableJms
 /*事务开启*/
 @EnableTransactionManagement
+/*定时任务开启*/
+@EnableScheduling
 public class DemoApplication {
 	/*注入消息队列 默认名字为sample.queue*/
 	@Bean

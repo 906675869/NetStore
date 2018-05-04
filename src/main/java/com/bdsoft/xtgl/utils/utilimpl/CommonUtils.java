@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util.utilimpl;
+package com.bdsoft.xtgl.utils.utilimpl;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

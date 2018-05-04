@@ -1,6 +1,5 @@
-package com.bdsoft.xtgl.util.activemq;
+package com.bdsoft.xtgl.utils.activemq;
 
-import com.bdsoft.xtgl.entity.Register;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 

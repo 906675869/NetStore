@@ -1,7 +1,7 @@
 package com.bdsoft.xtgl;
 
 
-import com.bdsoft.xtgl.util.activemq.Producer;
+import com.bdsoft.xtgl.utils.activemq.Producer;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;

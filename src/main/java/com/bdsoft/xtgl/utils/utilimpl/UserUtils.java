@@ -1,9 +1,9 @@
-package com.bdsoft.xtgl.util.utilimpl;
+package com.bdsoft.xtgl.utils.utilimpl;
 
 import com.bdsoft.xtgl.entity.Function;
 import com.bdsoft.xtgl.entity.Role;
 import com.bdsoft.xtgl.service.UserServiceI;
-import com.bdsoft.xtgl.util.UserUtilsI;
+import com.bdsoft.xtgl.utils.UserUtilsI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

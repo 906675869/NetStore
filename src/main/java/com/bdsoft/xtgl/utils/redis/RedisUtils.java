@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util.utilimpl;
+package com.bdsoft.xtgl.utils.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
@@ -24,9 +24,9 @@ public class RedisUtils {
 
     /**
          * 写入缓存
-         * @param key
-         * @param value
-         * @return
+         * @param key  redis键
+         * @param value redis值
+         * @return 返回插入是否成功
          */
         public boolean set(final String key, Object value) {
             boolean result = false;
@@ -41,9 +41,10 @@ public class RedisUtils {
         }
         /**
          * 写入缓存设置时效时间
-         * @param key
-         * @param value
-         * @return
+         * @param expireTime 失效时间
+         * @param key  redis键
+         * @param value redis值
+         * @return 返回插入是否成功
          */
         public boolean set(final String key, Object value, Long expireTime) {
             boolean result = false;
@@ -59,7 +60,7 @@ public class RedisUtils {
         }
         /**
          * 批量删除对应的value
-         * @param keys
+         * @param keys 键
          */
         public void remove(final String... keys) {
             for (String key : keys) {

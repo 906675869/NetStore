@@ -5,7 +5,7 @@ import com.bdsoft.xtgl.entity.User;
 import com.bdsoft.xtgl.mapper.LoginMapper;
 import com.bdsoft.xtgl.service.LoginServiceI;
 import com.bdsoft.xtgl.service.UserServiceI;
-import com.bdsoft.xtgl.util.utilimpl.RedisUtils;
+import com.bdsoft.xtgl.utils.redis.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

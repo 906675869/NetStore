@@ -1,4 +1,4 @@
-package com.bdsoft.xtgl.util;
+package com.bdsoft.xtgl.utils;
 
 import com.bdsoft.xtgl.entity.Function;
 import com.bdsoft.xtgl.entity.Role;
