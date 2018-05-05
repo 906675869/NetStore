@@ -21,7 +21,7 @@ public class RedisScheduledTask {
         this.redisServiceI = redisServiceI;
     }
 
-    @Scheduled(cron = "0 0 12 * * ?")
+    @Scheduled(cron = "0 53 * * * ?")
     public boolean  redisTransfer(){
         try {
             try {

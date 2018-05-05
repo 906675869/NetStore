@@ -54,7 +54,7 @@ public class TableUtils {
     }
     /*判断表是否存在*/
     public boolean isExistTable(String tableName){
-        Integer count = jdbcTemplate.queryForObject(sqlForCheckTableExists,Integer.class);
+        Integer count = jdbcTemplate.queryForObject(sqlForCheckTableExists,Integer.class,tableName);
         if(count > 0){return true;}
         return false;
     }

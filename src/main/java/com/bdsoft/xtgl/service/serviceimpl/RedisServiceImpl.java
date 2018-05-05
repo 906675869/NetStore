@@ -51,17 +51,13 @@ public class RedisServiceImpl implements RedisServiceI {
     public void convertAllToRedis() {
         //【1】 取得数据库中所有的表名
         List<String> list_table = tableUtils.getAllTables();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM S%");
-
         for(String table : list_table){
             //【2】 取得该表所有的列名
             List<String> list_columns_table = tableUtils.getColumnsByTable(table);
             //【3】取得该表的主键列名
             String idColumn = tableUtils.getIdColumnByTable(table);
             String redisKey = table+":"+idColumn;
-            String sql = String.format(stringBuilder.toString(),table);
-            List<Map<String,Object>> list = this.jdbcTemplate.queryForList(sql);
+            List<Map<String,Object>> list = tableUtils.getTableData(table);
             //【4】表 集合
             redisUtils.set(table,list);
             for(Map<String,Object> map : list){
